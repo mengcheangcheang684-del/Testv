@@ -1,0 +1,60 @@
+local get_net_hub = {
+    workspace = cloneref(game:FindFirstChildOfClass("Workspace")),
+    server_key_net = nil,
+    get_name_call = nil,
+    parry_hash = nil,
+    parry_remote = nil,
+    parry_key = nil
+}
+
+pcall(function()
+    for _, get_gc_nil in ipairs(getgc(true)) do
+        if type(get_gc_nil) == "function" then
+            local get_s_nil = debug.info(get_gc_nil, "s")
+            if get_s_nil and get_s_nil:find("SwordsController") and get_s_nil:find("PRY") then
+                for _, get_instance_net in ipairs(debug.getupvalues(get_gc_nil)) do
+                    if typeof(get_instance_net) == "Instance" and get_instance_net:IsA("RemoteEvent") then
+                        get_net_hub.server_key_net = debug.getupvalues(get_gc_nil)[4]
+                    end
+                end
+            end
+        end
+    end
+end)
+
+pcall(function()
+    hookfunction(game.FindService, function()
+        return nil
+    end)
+end)
+
+pcall(function()
+    get_net_hub.get_name_call = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
+        local get_met_hod = getnamecallmethod()
+        local get_args_net = {...}
+        if get_met_hod == "FireServer" and typeof(get_args_net[7]) == "table" then
+            get_net_hub.parry_hash = get_args_net[1]
+            get_net_hub.parry_remote = self
+            get_net_hub.parry_key = get_args_net[2]
+        end
+        return get_net_hub.get_name_call(self, ...)
+    end))
+end)
+
+function get_token_net()
+    if not get_net_hub.server_key_net or not get_net_hub.parry_key then
+        return ""
+    end
+    local get_time_server = tostring(math.floor(get_net_hub.workspace:GetServerTimeNow() * 100))
+    local get_key_server = get_net_hub.server_key_net(get_net_hub.parry_key, "TIME")
+    local get_token_server = ""
+    for i = 1, #get_time_server do
+        get_token_server = get_token_server .. string.char(
+            bit32.bxor(
+                (get_time_server:byte(i) + i) % 256,
+                get_key_server:byte((i - 1) % #get_key_server + 1)
+            )
+        )
+    end
+    return get_token_server
+end
