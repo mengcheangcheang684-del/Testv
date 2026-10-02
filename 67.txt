@@ -1,0 +1,18 @@
+CustomPlaylists = {
+    {Name = "🎵 Everything Works Out", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/everything%20works%20out%20in%20the%20end%20slowed%20best%20part%20looped.mp3"},
+    {Name = "🎵 Pupsies Misery Lyrics", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/pupsies%20misery.Lyrics.mp3"},
+    {Name = "🎵 Young Girl A Funk",        URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/YOUNG%20GIRL%20A%20FUNK%20ABDUKXRIM%20SLOWED%20REVERB%20BRAZILIAN%20PHONK.mp3"},
+    {Name = "🎵 Aura Feel Powerful",       URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/AURA%20%F0%9F%91%91%20Songs%20to%20feel%20Powerful%20Slowed.mp3"},
+    {Name = "💥 BRAWL Funk", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/BRAWL%20SWAG%20FUNK.mp3"},
+    {Name = "🌙 Beautiful Moon Funk", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/BEAUTIFUL%20MOON%20FUNK%20(SLOWED).mp3"},
+    {Name = "📌 Alan Walker", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/Alan%20Walker%20-%20Top%205%20Best%20Songs%202023.mp3"},
+    {Name = "👑 Story of the worrior", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/John%20Michael%20Howell%20-%20Story%20Of%20A%20Warrior%20%5BOFFICIAL%20LYRIC%20VIDEO%5D.mp3"},
+    {Name = "⚡ Meant To be", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/Cuntsniffer%20-%20Meant%20To%20Be%20(Lyrics).mp3"},
+    {Name = "🌑 Worry (SLOW)", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/worry%20(ultra%20slowed).mp3"},
+    {Name = "🕶️ After Dark", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/Nightcore%20-%20After%20Dark.mp3"},
+    {Name = "📌 Space Song", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/Beach%20House%20-%20Space%20Song%20(Lyrics).mp3"},
+    {Name = "❤️‍🩹 Notion", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/The%20Rare%20Occasions%20%20Notion%20Official%20Music%20Video.mp3"},
+    {Name = "🌱 Rise Up", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/TheFatRat%20-%20Rise%20Up%20%20(SLOWED%20%20REVERB).mp3"},
+    {Name = "you can't find this song", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/today%20is%20my%20birthday,%20so%20I'm%20giving%20you%20a%20song.mp3"},
+    {Name = "$Undown", URL = "https://github.com/foreverspacexc-blip/INVISRobloxMusic/raw/refs/heads/main/$%F0%9D%99%AA%F0%9D%99%A3%F0%9D%99%99%F0%9D%99%A4%F0%9D%99%AC%F0%9D%99%A3%20-%20%F0%9D%99%A8%F0%9D%99%A9%F0%9D%99%A7%F0%9D%99%96%F0%9D%99%AE.%F0%9D%99%AC%F0%9D%99%96%F0%9D%99%AB%20%5B%20%F0%9D%99%A8%F0%9D%99%A1%F0%9D%99%A4%F0%9D%99%AC%F0%9D%99%9A%F0%9D%99%99%20%20%F0%9D%99%A7%F0%9D%99%9A%F0%9D%99%AB%F0%9D%99%9A%F0%9D%99%A7%F0%9D%99%97%20%5D.mp3"}
+}
