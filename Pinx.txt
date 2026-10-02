@@ -1,0 +1,537 @@
+-- Reuse a completed session instead of installing duplicate hooks/connections.
+do
+    local session = getgenv().WindsRecoveredSession
+    if session and session.window and session.window._ui and session.window._ui.Parent then
+        session.window._ui.Enabled = true
+        session.window:change_visiblity(true)
+        return
+    end
+end
+-- Best-effort source reconstruction. See Reconstruction_Report.md.
+-- Constants were inferred; game-dependent features require runtime validation.
+local cloneref = cloneref or function(value) return value end
+local TweenService = game:GetService("TweenService")
+local Stats = game:GetService("Stats")
+
+
+											do
+												loadstring([[    function LPH_NO_VIRTUALIZE(f) return f end;
+    function LPH_JIT(f) return f end;
+    function LPH_NO_UPVALUES(f) return f end;
+    function LPH_JIT_MAX(f) return f end;
+    function LPH_ENCSTR(s) return s end;
+    function LPH_ENCFUNC(f) return f end;
+]])()
+
+												-- Removed unconditional 9999 FPS cap.
+
+												do
+													local gg = {
+														Language = {
+															CheckboxEnabled = "Enabled",
+															CheckboxDisabled = "Disabled",
+															SliderValue = "Value",
+															DropdownSelect = "Select",
+															DropdownNone = "None",
+															DropdownSelected = "Selected",
+															ButtonClick = "Click",
+															TextboxEnter = "Enter",
+															ModuleEnabled = "Enabled",
+															ModuleDisabled = "Disabled",
+															TabGeneral = "General",
+															TabSettings = "Settings",
+															Loading = "Loading...",
+															Error = "Error",
+															Success = "Success",
+														},
+													}
+
+													getgenv().GG = gg
+												end
+											end
+
+											language = GG.Language
+
+											convertStringToTable = function(arg)
+												local tbl23 = {}
+
+												for match in string.gmatch(arg, "([^,]+)") do
+													local match2 = match:match("^%s*(.-)%s*$")
+													table.insert(tbl23, match2)
+												end
+
+												return tbl23
+											end
+
+											convertTableToString = function(arg)
+												return table.concat(arg, ", ")
+											end
+
+											if not isfolder then
+												isfolder = function()
+													return false
+												end
+											end
+
+											if not makefolder then
+												makefolder = function()
+												end
+											end
+
+											if not writefile then
+												writefile = function()
+												end
+											end
+
+											if not readfile then
+												readfile = function()
+													return nil
+												end
+											end
+
+											v92 = cloneref(game:GetService("UserInputService"))
+											v93 = cloneref(game:GetService("ContentProvider"))
+											v94 = cloneref(game:GetService("TweenService"))
+											v89 = cloneref(game:GetService("HttpService"))
+											v95 = cloneref(game:GetService("TextService"))
+											v96 = cloneref(game:GetService("RunService"))
+											v97 = cloneref(game:GetService("Lighting"))
+											v98 = cloneref(game:GetService("Players"))
+											v99 = cloneref(game:GetService("CoreGui"))
+											v100 = cloneref(game:GetService("Debris"))
+											mouse = v98.LocalPlayer:GetMouse()
+
+											do
+												local v101 = v99:FindFirstChild("Winds")
+
+												if v101 then
+													v100:AddItem(v101, 0)
+												end
+											end
+-- Removed unmatched end from the supplied fragment.
+
+										do
+											local obj2, index2, instance
+
+											do
+												do
+													if not isfolder("WindsRecovered") then
+														makefolder("WindsRecovered")
+													end
+
+													getgenv()._WindsLoaded = true
+
+													obj2 = setmetatable({
+														disconnect = function(arg, arg2)
+															if not arg[arg2] then
+																return
+															end
+															arg[arg2]:Disconnect()
+															arg[arg2] = nil
+														end,
+														disconnect_all = function(arg)
+															for _, v101 in arg, nil, nil do
+																local v102 = "function"
+
+																if typeof(v101) ~= v102 then
+																	v101:Disconnect()
+																end
+															end
+														end,
+													}, Connections)
+
+													do
+														local obj3 = setmetatable({
+															map = function(arg, arg2, arg3, arg4, arg5, arg6)
+																return (arg2 - arg3) * (arg6 - arg5) / (arg4 - arg3) + arg5
+															end,
+															viewport_point_to_world = function(arg, arg2, arg3)
+																local v101 = workspace.CurrentCamera:ScreenPointToRay(arg2.X, arg2.Y)
+																return v101.Origin + v101.Direction * arg3
+															end,
+															get_offset = function(arg)
+																return arg:map(workspace.CurrentCamera.ViewportSize.Y, 0, 1080, 8, 56)
+															end,
+														}, Util)
+
+														index2 = {}
+														index2.__index = index2
+
+														index2.new = function(arg)
+															local obj4 = setmetatable({ _object = arg, _folder = nil, _frame = nil, _root = nil }, index2)
+															obj4:setup()
+															return obj4
+														end
+
+														index2.create_folder = function(arg)
+															local v101 = workspace.CurrentCamera:FindFirstChild("Acrylic")
+
+															if v101 then
+																v100:AddItem(v101, 0)
+															end
+
+															local folder = Instance.new("Folder")
+															folder.Name = "Acrylic"
+															folder.Parent = workspace.CurrentCamera
+															arg._folder = folder
+														end
+
+														index2.create_depth_of_fields = function()
+															local acrylicBlur = v97:FindFirstChild("AcrylicBlur") or Instance.new("DepthOfFieldEffect")
+															acrylicBlur.FarIntensity = 0
+															acrylicBlur.FocusDistance = 0.05
+															acrylicBlur.InFocusRadius = 0.1
+															acrylicBlur.NearIntensity = 1
+															acrylicBlur.Name = "AcrylicBlur"
+															acrylicBlur.Parent = v97
+
+															for _, v101 in v97:GetChildren() do
+																if v101:IsA("DepthOfFieldEffect") then
+																	if v101 ~= acrylicBlur then
+																		obj2[v101] = v101:GetPropertyChangedSignal("FarIntensity"):Connect(function()
+																			v101.FarIntensity = 0
+																		end)
+
+																		v101.FarIntensity = 0
+																	end
+																end
+															end
+														end
+
+														index2.create_frame = function(arg)
+															local frame = Instance.new("Frame")
+															frame.Size = UDim2.new(1, 0, 1, 0)
+															frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+															frame.AnchorPoint = Vector2.new(0.5, 0.5)
+															frame.BackgroundTransparency = 1
+															frame.Parent = arg._object
+															arg._frame = frame
+														end
+
+														index2.create_root = function(arg)
+															local part = Instance.new("Part")
+															part.Name = "Root"
+															part.Color = Color3.new(0, 0, 0)
+															part.Material = Enum.Material.Glass
+															part.Size = Vector3.new(1, 1, 0)
+															part.Anchored = true
+															part.CanCollide = false
+															part.CanQuery = false
+															part.Locked = true
+															part.CastShadow = false
+															part.Transparency = 0.98
+															part.Parent = arg._folder
+															local specialMesh = Instance.new("SpecialMesh")
+															specialMesh.MeshType = Enum.MeshType.Brick
+															specialMesh.Offset = Vector3.new(0, 0, -0.1)
+															specialMesh.Parent = part
+															arg._root = part
+														end
+
+														index2.setup = function(arg)
+															arg:create_depth_of_fields()
+															arg:create_folder()
+															arg:create_root()
+															arg:create_frame()
+															arg:render(0.001)
+															arg:check_quality_level()
+														end
+
+														index2.render = function(arg, arg2)
+															local currentCamera = workspace.CurrentCamera
+															local screenGui = arg._object:FindFirstAncestorWhichIsA("ScreenGui")
+															local vector2 = Vector2.zero
+															local vector22 = Vector2.zero
+															local vector23 = Vector2.zero
+															local flag21 = true
+
+															local function fn32()
+																return arg._root ~= nil and arg._object.Visible and (screenGui == nil or screenGui.Enabled)
+															end
+
+															local function fn33()
+																if false then -- recovered opaque guard
+																	error("Unreachable obfuscation trap")
+																end
+
+																local v101 = obj3:viewport_point_to_world(vector2, arg2)
+																local v102 = obj3:viewport_point_to_world(vector22, arg2)
+																local v103 = obj3:viewport_point_to_world(vector23, arg2)
+																local magnitude = (v102 - v101).Magnitude
+																local magnitude2 = (v102 - v103).Magnitude
+																local cFrame = currentCamera.CFrame
+																arg._root.CFrame = CFrame.fromMatrix((v101 + v103) / 2, cFrame.XVector, cFrame.YVector, cFrame.ZVector)
+																arg._root.Mesh.Scale = Vector3.new(magnitude, magnitude2, 0)
+															end
+
+															local function fn34()
+																local v101 = obj3:get_offset()
+																local n = arg._frame.AbsoluteSize - Vector2.new(v101, v101)
+																local n36 = arg._frame.AbsolutePosition + Vector2.new(v101 / 2, v101 / 2)
+																vector2 = n36
+																vector22 = n36 + Vector2.new(n.X, 0)
+																vector23 = n36 + n
+																flag21 = true
+															end
+
+															local function fn35()
+																flag21 = true
+															end
+
+															obj2.cframe_update = currentCamera:GetPropertyChangedSignal("CFrame"):Connect(fn35)
+															obj2.viewport_size_update = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(fn35)
+															obj2.field_of_view_update = currentCamera:GetPropertyChangedSignal("FieldOfView"):Connect(fn35)
+															obj2.frame_absolute_position = arg._frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(fn34)
+															obj2["frame_size_update"] = arg._frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(fn34)
+															obj2.blur_render = v96.RenderStepped:Connect(function()
+    if not arg._object.Parent then obj2:disconnect("blur_render"); return end
+    if fn32() then
+        if flag21 then fn33(); flag21 = false end
+    end
+end)
+															fn34()
+														end
+													end
+												end
+
+												do
+													index2.check_quality_level = function(arg)
+														local gameSettings = UserSettings().GameSettings
+
+														if gameSettings.SavedQualityLevel.Value < 8 then
+															arg:change_visiblity(false)
+														end
+
+														obj2.quality_level = gameSettings:GetPropertyChangedSignal("SavedQualityLevel"):Connect(function()
+															arg:change_visiblity(UserSettings().GameSettings.SavedQualityLevel.Value >= 8)
+														end)
+													end
+
+													index2.change_visiblity = function(arg, arg2)
+														arg._root.Transparency = arg2 and 0.98 or 1
+													end
+
+													obj = setmetatable({
+														save = function(arg, arg2, arg3)
+															local ok, result = pcall(function()
+																local json = v89:JSONEncode(arg3)
+																writefile("WindsRecovered/" .. arg2 .. ".json", json)
+															end)
+
+															if not ok then
+																warn("[Winds config]", result)
+															end
+														end,
+														load = function(arg, arg2, arg3)
+															local ok, result = pcall(function()
+																if not isfile("WindsRecovered/" .. arg2 .. ".json") then
+																	arg:save(arg2, arg3)
+																	return
+																end
+																local v101 = readfile("WindsRecovered/" .. arg2 .. ".json")
+																if not v101 then
+																	arg:save(arg2, arg3)
+																	return
+																end
+																return v89:JSONDecode(v101)
+															end)
+
+															if not ok then
+																warn("failed to load config", result)
+															end
+
+															return result or { _flags = {}, _keybinds = {}, _library = {} }
+														end,
+													}, Config)
+
+													index = {
+														_config = obj:load(game.GameId),
+														_choosing_keybind = false,
+														_device = nil,
+														_ui_open = true,
+														_ui_scale = 1,
+														_ui_loaded = false,
+														_ui = nil,
+														_dragging = false,
+														_drag_start = nil,
+														_container_position = nil,
+													}
+
+													index.__index = index
+index._connections = obj2
+
+													index.new = function()
+														local obj3 = setmetatable({ _loaded = false, _tab = 0 }, index)
+														obj3:create_ui()
+														return obj3
+													end
+
+													index._all_modules = {}
+
+													do
+														local instance2 = Instance.new("ScreenGui")
+														instance2.Name = "WindsNotifications"
+														instance2.ResetOnSpawn = false
+														instance2.IgnoreGuiInset = true
+														instance2.ZIndexBehavior = Enum.ZIndexBehavior.Global
+														instance2.Parent = v99
+														instance = Instance.new("Frame")
+														instance.Name = "Container"
+														instance.Size = UDim2.new(0, 340, 1, -40)
+														instance.Position = UDim2.new(0, 20, 1, -20)
+														instance.AnchorPoint = Vector2.new(0, 1)
+														instance.BackgroundTransparency = 1
+														instance.ClipsDescendants = false
+														instance.Parent = instance2
+													end
+												end
+
+												do
+													local uiListLayout = Instance.new("UIListLayout")
+													uiListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+													uiListLayout.Padding = UDim.new(0, 12)
+													uiListLayout.Parent = instance
+												end
+											end
+
+											do
+												local color = Color3.fromRGB(18, 18, 24)
+												local color2 = Color3.fromRGB(42, 45, 65)
+												local color3 = Color3.fromRGB(235, 235, 245)
+												local color4 = Color3.fromRGB(160, 160, 180)
+												Color3.fromRGB(139, 92, 246)
+												Color3.fromRGB(167, 139, 250)
+
+												index.SendNotification = function(arg)
+													local instance2 = Instance.new("Frame")
+													instance2.Size = UDim2.new(0, 240, 0, 48)
+													instance2.BackgroundTransparency = 1
+													instance2.Parent = instance
+													local frame = Instance.new("Frame")
+													frame.Size = UDim2.new(1, 0, 1, 0)
+													frame.BackgroundColor3 = color
+													frame.BackgroundTransparency = 0.05
+													frame.BorderSizePixel = 0
+													frame.Parent = instance2
+													local uiCorner = Instance.new("UICorner")
+													uiCorner.CornerRadius = UDim.new(0, 14)
+													uiCorner.Parent = frame
+													local uiStroke = Instance.new("UIStroke")
+													uiStroke.Color = color2
+													uiStroke.Transparency = 0.1
+													uiStroke.Thickness = 1
+													uiStroke.Parent = frame
+													local instance3 = Instance.new("ImageLabel")
+													instance3.BackgroundTransparency = 1
+													instance3.Size = UDim2.new(0, 16, 0, 16)
+													instance3.Position = UDim2.new(0, 14, 0.5, 0)
+													instance3.AnchorPoint = Vector2.new(0, 0.5)
+													instance3.Image = arg.icon or ""
+													instance3.ImageColor3 = arg.iconColor or Color3.fromRGB(200, 200, 200)
+													instance3.Parent = frame
+													local textLabel = Instance.new("TextLabel")
+													textLabel.Text = arg.title or "Notification"
+													textLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium)
+													textLabel.TextSize = 13
+													textLabel.TextColor3 = color3
+													textLabel.BackgroundTransparency = 1
+													textLabel.Position = UDim2.new(0, 44, 0, 8)
+													textLabel.Size = UDim2.new(1, -56, 0, 16)
+													textLabel.TextXAlignment = Enum.TextXAlignment.Left
+													textLabel.TextTruncate = Enum.TextTruncate.AtEnd
+													textLabel.Parent = frame
+													local textLabel2 = Instance.new("TextLabel")
+													textLabel2.Text = arg.text or ""
+													textLabel2.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Regular)
+													textLabel2.TextSize = 13
+													textLabel2.TextColor3 = color4
+													textLabel2.BackgroundTransparency = 1
+													textLabel2.Position = UDim2.new(0, 44, 0, 24)
+													textLabel2.Size = UDim2.new(1, -56, 0, 16)
+													textLabel2.TextWrapped = false
+													textLabel2.TextTruncate = Enum.TextTruncate.AtEnd
+													textLabel2.TextXAlignment = Enum.TextXAlignment.Left
+													textLabel2.Parent = frame
+													frame.Position = UDim2.new(-1, 0, 0, 0)
+													v94:Create(frame, TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Position = UDim2.new(0, 0, 0, 0) }):Play()
+
+													task.delay(arg.duration or 5, function()
+														v94:Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In), { Position = UDim2.new(-1, 0, 0, 0), BackgroundTransparency = 1 }):Play()
+
+														task.delay(0.3, function()
+															instance2:Destroy()
+														end)
+													end)
+												end
+											end
+
+											index.get_screen_scale = function(arg)
+												arg._ui_scale = workspace.CurrentCamera.ViewportSize.X / 1920
+											end
+
+											index.get_device = function(arg)
+												local device
+
+												if not v92.TouchEnabled and v92.KeyboardEnabled and v92.MouseEnabled then
+													device = "PC"
+												elseif v92.TouchEnabled then
+													device = "Mobile"
+												else
+													device = "Unknown"
+
+													if v92.GamepadEnabled then
+														device = "Console"
+													end
+												end
+
+												arg._device = device
+											end
+
+											index.removed = function(arg, arg2)
+												arg._ui.AncestryChanged:Once(arg2)
+											end
+
+											index.flag_type = function(arg, arg2, arg3)
+												if not index._config._flags[arg2] then
+													return
+												end
+												return typeof(index._config._flags[arg2]) == arg3
+											end
+
+											index.remove_table_value = function(arg, arg2, arg3)
+												for k, v101 in arg2, nil, nil do
+													if v101 == arg3 then
+														table.remove(arg2, k)
+													end
+												end
+											end
+
+											index.create_ui = function(arg)
+												local winds = v99:FindFirstChild("Winds")
+
+												if winds then
+													v100:AddItem(winds, 0)
+												end
+
+												local screenGui = Instance.new("ScreenGui")
+												screenGui.ResetOnSpawn = false
+												screenGui.Name = "Winds"
+												screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+												screenGui.Parent = v99
+												local frame = Instance.new("Frame")
+												frame.ClipsDescendants = true
+												frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+												frame.AnchorPoint = Vector2.new(0.5, 0.5)
+												frame.Name = "Container"
+												frame.BackgroundColor3 = Color3.fromRGB(12, 14, 16)
+												frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+												frame.Size = UDim2.new(0, 0, 0, 0)
+												frame.Active = true
+												frame.BorderSizePixel = 0
+												frame.Parent = screenGui
+												local uiCorner = Instance.new("UICorner")
+												uiCorner.CornerRadius = UDim.new(0, 16)
+												uiCorner.Parent = frame
+												local instance2 = Instance.new("Frame")
+												instance2.BackgroundTransparency = 1
+												instance2.Name = "Handle
