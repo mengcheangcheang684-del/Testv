@@ -114,12 +114,11 @@ do
                                         local tertiaryValue = remotes:WaitForChild("FireSwordInfo", 10)
                                         if tertiaryValue then
                                             local quaternaryValue, auxiliary
-                                            -- Context cut off point from input script managed below safely
                                         end
                                     end
 
                                     -- =========================================================================
-                                    -- NEW REMADE BACKGROUND & ULTRA COOL PARRY BUTTON (xtttp edition)
+                                    -- NEW FIXED REMADE BACKGROUND & ULTRA COOL PARRY BUTTON (xtttp edition)
                                     -- =========================================================================
                                     local CoreGui = game:GetService("CoreGui")
                                     
@@ -144,3 +143,6 @@ do
                                     local UIStroke = createInstance("UIStroke")
                                     UIStroke.Thickness = 2
                                     UIStroke.Color = colorFromRGB(0, 180, 255)
+                                    UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+                                    UIStroke.Parent = MainFrame
+
