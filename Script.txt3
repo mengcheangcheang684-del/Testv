@@ -1,0 +1,146 @@
+local controlValueA = 3238
+local controlValueB = 1420
+local controlFlagA = true
+local controlFlagB = true
+do
+    do
+        do
+            do
+                do
+                    do
+                        do
+                            do
+                                do
+                                    local secondaryValue
+                                    do
+                                        if _G.oxy then
+                                            return 
+                                        end
+                                        _G.oxy = true
+                                        cloneref = cloneref or function(inputValue)
+                                            return inputValue
+                                        end
+                                        do
+                                            local cloneReference = cloneref
+                                            createInstance = Instance.new
+                                            createTweenInfo = TweenInfo.new
+                                            createUDim = UDim.new
+                                            createUDim2 = UDim2.new
+                                            fromOffset = UDim2.fromOffset
+                                            createVector2 = Vector2.new
+                                            createVector3 = Vector3.new
+                                            createCFrame = CFrame.new
+                                            colorFromRGB = Color3.fromRGB
+                                            formatString = string.format
+                                            clampValue = math.clamp
+                                            floorValue = math.floor
+                                            maxValue = math.max
+                                            minValue = math.min
+                                            arcSin = math.asin
+                                            toRadians = math.rad
+                                            randomValue = math.random
+                                            bitwiseXor = bit32.bxor
+                                            clearTable = table.clear
+                                            concatTable = table.concat
+                                            createTable = table.create
+                                            findInTable = table.find
+                                            insertIntoTable = table.insert
+                                            stringByte = string.byte
+                                            stringChar = string.char
+                                            spawnTask = task.spawn
+                                            delayTask = task.delay
+                                            deferTask = task.defer
+                                            waitTask = task.wait
+                                            globalEnvironment = getgenv()
+                                            ReplicatedStorage = cloneReference(game:GetService("ReplicatedStorage"))
+                                            UserInputService = cloneReference(game:GetService("UserInputService"))
+                                            httpService = cloneReference(game:GetService("HttpService"))
+                                            local runService = cloneReference(game:GetService("RunService"))
+                                            TweenService = cloneReference(game:GetService("TweenService"))
+                                            Players = cloneReference(game:GetService("Players"))
+                                            Debris = cloneReference(game:GetService("Debris"))
+                                            local statsService = cloneReference(game:GetService("Stats"))
+                                            Workspace = cloneReference(game:GetService("Workspace"))
+                                            createTween = TweenService.Create
+                                            repeat
+                                                waitTask()
+                                            until game:IsLoaded()
+                                            localPlayer = Players.LocalPlayer
+                                            name = localPlayer.Name
+                                            currentCamera = Workspace.CurrentCamera
+                                            Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+                                                currentCamera = Workspace.CurrentCamera
+                                            end)
+                                            remotes = ReplicatedStorage:WaitForChild("Remotes", 10)
+                                            packages = ReplicatedStorage.Packages
+                                            controllers = ReplicatedStorage.Controllers
+                                            balls = Workspace.Balls
+                                            alive = Workspace.Alive
+                                            runtime = Workspace.Runtime
+                                            dataPing = statsService.Network.ServerStatsItem["Data Ping"]
+                                            heartbeat = runService.Heartbeat
+                                            preSimulation = runService.PreSimulation
+                                            postSimulation = runService.PostSimulation
+                                        end
+                                    end
+                                    swordEventConnections = {
+                                        parry_connections = {
+                                        },
+                                        fire_sword_connections = {
+                                        },
+                                        play_parry = nil,
+                                        sword_fn = nil,
+                                    }
+                                    if remotes and type(getconnections) == "function" then
+                                        do
+                                            local parrySuccessAll = remotes:WaitForChild("ParrySuccessAll", 10)
+                                            if parrySuccessAll then
+                                                local tertiaryValue, quaternaryValue = pcall(getconnections, parrySuccessAll.OnClientEvent)
+                                                if tertiaryValue and type(quaternaryValue) == "table" then
+                                                    for _, auxiliaryValue in quaternaryValue, nil, nil do
+                                                        do
+                                                            local candidateValue, resultValue = pcall(function()
+                                                                return auxiliaryValue.Function
+                                                            end)
+                                                            if candidateValue and type(resultValue) == "function" then
+                                                                insertIntoTable(swordEventConnections.parry_connections, auxiliaryValue)
+                                                                swordEventConnections.play_parry = resultValue
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            end
+                                        end
+                                        local tertiaryValue = remotes:WaitForChild("FireSwordInfo", 10)
+                                        if tertiaryValue then
+                                            local quaternaryValue, auxiliary
+                                            -- Context cut off point from input script managed below safely
+                                        end
+                                    end
+
+                                    -- =========================================================================
+                                    -- NEW REMADE BACKGROUND & ULTRA COOL PARRY BUTTON (xtttp edition)
+                                    -- =========================================================================
+                                    local CoreGui = game:GetService("CoreGui")
+                                    
+                                    -- Clean ScreenGui setup
+                                    local ScreenGui = createInstance("ScreenGui")
+                                    ScreenGui.Name = "xtttp_Menu"
+                                    ScreenGui.ResetOnSpawn = false
+                                    ScreenGui.Parent = CoreGui
+
+                                    -- Sleek Dark Minimal Background Frame
+                                    local MainFrame = createInstance("Frame")
+                                    MainFrame.Name = "MainFrame"
+                                    MainFrame.Size = createUDim2(0, 240, 0, 160)
+                                    MainFrame.Position = createUDim2(0.5, -120, 0.4, -80)
+                                    MainFrame.BackgroundColor3 = colorFromRGB(15, 15, 20)
+                                    MainFrame.BorderSizePixel = 0
+                                    MainFrame.Active = true
+                                    MainFrame.Draggable = true
+                                    MainFrame.Parent = ScreenGui
+
+                                    -- Subtle RGB Stroke Glow Border
+                                    local UIStroke = createInstance("UIStroke")
+                                    UIStroke.Thickness = 2
+                                    UIStroke.Color = colorFromRGB(0, 180, 255)
